@@ -1,22 +1,18 @@
-import time
+# motors_control.py
 
-class Robot:
+class RobotMotors:
     def __init__(self):
         self.speed = 0
 
     def set_speed(self, speed):
-        if 0 <= speed <= 100:
-            while self.speed != speed:
-                if self.speed < speed:
-                    self.speed += 1
-                else:
-                    self.speed -= 1
-                print(f"Speed set to {self.speed}%")
-                time.sleep(0.1)
+        if speed < 0:
+            self.speed = 0
+        elif speed > 100:
+            self.speed = 100
         else:
-            print("Speed must be between 0 and 100.")
+            self.speed = speed
+        print(f"Motor speed set to {self.speed}%")
 
-    def stop(self):
-        self.set_speed(0)
-        print("Robot stopped.")
-
+if __name__ == "__main__":
+    robot = RobotMotors()
+    robot.set_speed(50)  
